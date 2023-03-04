@@ -31,6 +31,11 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("onTyping", (uid) => {
+    console.log(uid, " is typing");
+    io.emit("getOnTyping", uid);
+  });
+
   socket.on("disconnect", () => {
     onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
     io.emit("getOnlineUsers", onlineUsers);
